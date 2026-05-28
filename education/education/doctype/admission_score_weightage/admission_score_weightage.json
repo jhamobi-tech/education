@@ -1,0 +1,159 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:title",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "column_break_1",
+  "is_default",
+  "section_break_2",
+  "program",
+  "academic_year",
+  "column_break_3",
+  "is_active",
+  "section_break_weightage",
+  "external_exam_weightage",
+  "cet_weightage",
+  "column_break_4",
+  "gd_weightage",
+  "pi_weightage",
+  "extempore_weightage",
+  "section_break_total",
+  "total_weightage"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_default",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Default"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break",
+   "label": "Scope"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Program"
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "label": "Academic Year",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "section_break_weightage",
+   "fieldtype": "Section Break",
+   "label": "Score Weightages"
+  },
+  {
+   "default": "20",
+   "fieldname": "external_exam_weightage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "External Exam Weightage",
+   "reqd": 1
+  },
+  {
+   "default": "20",
+   "fieldname": "cet_weightage",
+   "fieldtype": "Float",
+   "label": "CET Weightage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "20",
+   "fieldname": "gd_weightage",
+   "fieldtype": "Float",
+   "label": "GD Weightage",
+   "reqd": 1
+  },
+  {
+   "default": "25",
+   "fieldname": "pi_weightage",
+   "fieldtype": "Float",
+   "label": "PI Weightage",
+   "reqd": 1
+  },
+  {
+   "default": "15",
+   "fieldname": "extempore_weightage",
+   "fieldtype": "Float",
+   "label": "Extempore Weightage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_total",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_weightage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Weightage",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Admission Score Weightage",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}
