@@ -186,7 +186,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Admissions",
-   "link_count": 4,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -207,16 +207,6 @@
    "label": "Student Admission",
    "link_count": 0,
    "link_to": "Student Admission",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Applicant Consolidated Score",
-   "link_count": 0,
-   "link_to": "Applicant Consolidated Score",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
