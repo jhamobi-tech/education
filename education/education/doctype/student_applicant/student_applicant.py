@@ -7,11 +7,6 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_years, date_diff, flt, getdate, nowdate
 
-EXAM_MAX_SCORES = {
-	"CAT": 100, "XAT": 100, "MAT": 100,
-	"NMAT": 600, "SNAP": 150, "CMAT": 400, "GMAT": 800, "GRE": 340,
-}
-
 
 def _normalize(actual, maximum):
 	return flt((flt(actual) / flt(maximum)) * 100, 2) if flt(maximum) else 0.0
@@ -99,38 +94,107 @@ class StudentApplicant(Document):
 
 	def compute_consolidated_score(self):
 		"""
-		Reads flat score fields from Application Details tab,
-		normalizes them, and computes the weighted consolidated score.
-		Flat fields: cat_score, xat_score, mat_score, nmat_score,
-		             mit_cet_score (or cet_score), gd_score, pi_score, extempore_score
+		Dispatch to the dynamic Selection Criteria path when one is available,
+		otherwise fall back to the legacy Admission Score Weightage path.
 		"""
-		# Read score fields from Application Details tab
+		criteria = self._get_selection_criteria()
+		if criteria:
+			self._compute_from_criteria(criteria)
+		else:
+			self._compute_from_weightage_config()
+
+	# ── Dynamic path (Selection Criteria) ────────────────────────────────────
+
+	def _get_selection_criteria(self):
+		"""Return the active Selection Criteria doc for this applicant, or None."""
+		from education.education.doctype.selection_criteria.selection_criteria import (
+			SelectionCriteria,
+		)
+
+		if self.selection_criteria:
+			return frappe.get_doc("Selection Criteria", self.selection_criteria)
+
+		criteria = SelectionCriteria.get_active_criteria(
+			program=self.program,
+			academic_year=self.academic_year,
+			admission_round=self.student_admission,
+		)
+		if criteria:
+			self.selection_criteria = criteria.name
+		return criteria
+
+	def _compute_from_criteria(self, criteria):
+		"""
+		Score computation driven entirely by Selection Criteria config.
+		Each entrance exam row carries score_fieldname (which field to read on
+		this document) and max_score (denominator for normalisation).
+		No exam names or max-scores are hardcoded here.
+		"""
+		exam_config = {row.exam_name: row for row in criteria.entrance_exams}
+
+		self.score_components = []
+		total_weighted, total_weightage, has_scores = 0.0, 0.0, False
+
+		for w_row in criteria.weightage_configuration:
+			if not w_row.is_active:
+				continue
+
+			exam = exam_config.get(w_row.exam_name)
+			if not exam or not exam.score_fieldname:
+				continue
+
+			raw = flt(self.get(exam.score_fieldname))
+			if raw:
+				has_scores = True
+
+			normalized = _normalize(raw, exam.max_score)
+			weightage  = flt(w_row.weightage)
+			weighted   = flt((normalized * weightage) / 100, 4)
+
+			self.append("score_components", {
+				"component":      w_row.exam_name,
+				"score":          normalized,
+				"maximum_score":  100,
+				"weightage":      weightage,
+				"weighted_score": weighted,
+			})
+			total_weighted  += weighted
+			total_weightage += weightage
+
+		if not has_scores:
+			return
+
+		self.consolidated_score = flt(
+			(total_weighted / total_weightage) * 100, 2
+		) if total_weightage else 0.0
+		self.score_status = "Computed"
+
+	# ── Legacy path (Admission Score Weightage) ───────────────────────────────
+
+	def _compute_from_weightage_config(self):
+		"""
+		Original hardcoded scoring path kept for backward compatibility.
+		Used when no Selection Criteria matches this applicant.
+		"""
 		cet_score       = flt(self.get("mit_cet_score"))
 		gd_score        = flt(self.get("gd_score"))
 		pi_score        = flt(self.get("pi_score"))
 		extempore_score = flt(self.get("extempore_score"))
 
-		has_scores = any([cet_score, gd_score, pi_score, extempore_score])
-		if not has_scores:
+		if not any([cet_score, gd_score, pi_score, extempore_score]):
 			return
 
-		# MIT CET is the external exam (normalized to /100)
-		best_name  = "MIT CET"
-		best_score = _normalize(cet_score, 100)
+		cet_norm       = _normalize(cet_score,       100)
+		gd_norm        = _normalize(gd_score,         20)
+		pi_norm        = _normalize(pi_score,         20)
+		extempore_norm = _normalize(extempore_score,  20)
 
-		# ── Internal: normalize to /100 ───────────────────────────────────────
-		cet_norm       = best_score
-		gd_norm        = _normalize(gd_score,        20)
-		pi_norm        = _normalize(pi_score,        20)
-		extempore_norm = _normalize(extempore_score, 20)
-
-		# ── Resolve weightage config ──────────────────────────────────────────
 		config = self._get_weightage_config()
 		if not config:
 			return
 
 		component_map = {
-			"External Exam": (best_score,    flt(config.external_exam_weightage)),
+			"External Exam": (cet_norm,       flt(config.external_exam_weightage)),
 			"CET":           (cet_norm,       flt(config.cet_weightage)),
 			"GD":            (gd_norm,        flt(config.gd_weightage)),
 			"PI":            (pi_norm,        flt(config.pi_weightage)),

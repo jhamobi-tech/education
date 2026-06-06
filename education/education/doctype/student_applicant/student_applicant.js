@@ -11,6 +11,10 @@ frappe.ui.form.on('Student Applicant', {
       }
     })
 
+    frm.set_query('selection_criteria', function () {
+      return { filters: { program: frm.doc.program, is_active: 1 } }
+    })
+
     if (!frm.is_new() && frm.doc.application_status === 'Applied') {
       frm.add_custom_button(
         __('Approve'),
@@ -84,6 +88,31 @@ frappe.ui.form.on('Student Applicant', {
     frappe.model.open_mapped_doc({
       method: 'education.education.api.enroll_student',
       frm: frm,
+    })
+  },
+
+  // Auto-resolve Selection Criteria whenever scope fields change
+  program: (frm) => frm.events._resolve_selection_criteria(frm),
+  academic_year: (frm) => frm.events._resolve_selection_criteria(frm),
+  student_admission: (frm) => frm.events._resolve_selection_criteria(frm),
+
+  _resolve_selection_criteria: function (frm) {
+    if (!frm.doc.program) return
+    // Only auto-fill if not manually set
+    if (frm.doc.selection_criteria) return
+    frappe.db.get_list('Selection Criteria', {
+      filters: {
+        program: frm.doc.program,
+        is_active: 1,
+        ...(frm.doc.academic_year    && { academic_year:    frm.doc.academic_year }),
+        ...(frm.doc.student_admission && { admission_round: frm.doc.student_admission }),
+      },
+      fields: ['name'],
+      limit: 1,
+    }).then(rows => {
+      if (rows && rows.length) {
+        frm.set_value('selection_criteria', rows[0].name)
+      }
     })
   },
 })

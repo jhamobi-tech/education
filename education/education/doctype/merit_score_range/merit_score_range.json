@@ -5,38 +5,43 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "component",
-  "score",
-  "maximum_score",
+  "merit_status",
+  "min_score",
+  "max_score",
+  "description",
   "column_break_1",
-  "weightage",
-  "weighted_score"
+  "applicant_count"
  ],
  "fields": [
   {
    "columns": 3,
-   "fieldname": "component",
-   "fieldtype": "Data",
+   "fieldname": "merit_status",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Component",
-   "read_only": 1,
+   "label": "Merit Status",
+   "options": "Selected\nWaiting\nIn Progress\nRejected",
    "reqd": 1
   },
   {
    "columns": 2,
-   "fieldname": "score",
+   "fieldname": "min_score",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Score (/100)",
-   "read_only": 1
+   "label": "Min Score"
   },
   {
    "columns": 2,
-   "fieldname": "maximum_score",
+   "fieldname": "max_score",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Max Score",
-   "read_only": 1
+   "label": "Max Score"
+  },
+  {
+   "columns": 3,
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description"
   },
   {
    "fieldname": "column_break_1",
@@ -44,18 +49,11 @@
   },
   {
    "columns": 2,
-   "fieldname": "weightage",
-   "fieldtype": "Float",
+   "default": "0",
+   "fieldname": "applicant_count",
+   "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Weightage",
-   "read_only": 1
-  },
-  {
-   "columns": 2,
-   "fieldname": "weighted_score",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Weighted Score",
+   "label": "Applicants",
    "read_only": 1
   }
  ],
@@ -64,10 +62,11 @@
  "modified": "2024-01-01 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Education",
- "name": "Consolidated Score Component",
+ "name": "Merit Score Range",
  "owner": "Administrator",
  "permissions": [],
  "quick_entry": 1,
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

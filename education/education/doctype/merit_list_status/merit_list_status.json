@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "naming_series",
+  "column_break_header",
+  "admission_round",
+  "program",
+  "academic_year",
+  "column_break_2",
+  "merit_list_number",
+  "section_break_ranges",
+  "score_ranges",
+  "section_break_publication",
+  "is_published",
+  "column_break_pub",
+  "is_locked",
+  "published_on",
+  "section_break_stats",
+  "total_applicants_processed",
+  "column_break_stats",
+  "generation_remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "EDU-MLS-.YYYY.-",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "admission_round",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Admission Round",
+   "options": "Student Admission",
+   "reqd": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Academic Year",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "merit_list_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Merit List Number"
+  },
+  {
+   "fieldname": "section_break_ranges",
+   "fieldtype": "Section Break",
+   "label": "Score Ranges"
+  },
+  {
+   "fieldname": "score_ranges",
+   "fieldtype": "Table",
+   "label": "Score Ranges",
+   "options": "Merit Score Range",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_publication",
+   "fieldtype": "Section Break",
+   "label": "Publication"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "fieldname": "column_break_pub",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_locked",
+   "fieldtype": "Check",
+   "label": "Locked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "published_on",
+   "fieldtype": "Datetime",
+   "label": "Published On",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_stats",
+   "fieldtype": "Section Break",
+   "label": "Generation Stats"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_applicants_processed",
+   "fieldtype": "Int",
+   "label": "Total Applicants Processed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_stats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "generation_remarks",
+   "fieldtype": "Small Text",
+   "label": "Generation Remarks",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Merit List Status",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

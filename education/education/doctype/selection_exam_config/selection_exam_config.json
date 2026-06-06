@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "exam_name",
+  "score_fieldname",
+  "max_score",
+  "minimum_passing_score",
+  "column_break_1",
+  "is_mandatory",
+  "description"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "exam_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Exam Name",
+   "reqd": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "score_fieldname",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Score Field",
+   "description": "Fieldname in Student Applicant that stores this exam's raw score (e.g. mit_cet_score)"
+  },
+  {
+   "columns": 2,
+   "fieldname": "max_score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Max Score",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "minimum_passing_score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Min Passing Score"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "is_mandatory",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Mandatory"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Selection Exam Config",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

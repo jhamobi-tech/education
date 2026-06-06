@@ -60,6 +60,7 @@
   "extempore_score",
   "tab_consolidated_score",
   "section_score_config",
+  "selection_criteria",
   "weightage_config",
   "column_break_score_cfg",
   "score_status",
@@ -70,7 +71,11 @@
   "column_break_score_result",
   "percentile_rank",
   "section_score_remarks",
-  "score_remarks"
+  "score_remarks",
+  "section_merit",
+  "merit_status",
+  "column_break_merit",
+  "merit_list"
  ],
  "fields": [
   {
@@ -366,9 +371,15 @@
    "label": "Configuration"
   },
   {
+   "fieldname": "selection_criteria",
+   "fieldtype": "Link",
+   "label": "Selection Criteria",
+   "options": "Selection Criteria"
+  },
+  {
    "fieldname": "weightage_config",
    "fieldtype": "Link",
-   "label": "Weightage Config",
+   "label": "Weightage Config (Legacy)",
    "options": "Admission Score Weightage"
   },
   {
@@ -428,6 +439,31 @@
    "fieldname": "score_remarks",
    "fieldtype": "Small Text",
    "label": "Score Remarks"
+  },
+  {
+   "fieldname": "section_merit",
+   "fieldtype": "Section Break",
+   "label": "Merit Status"
+  },
+  {
+   "fieldname": "merit_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Merit Status",
+   "options": "\nSelected\nWaiting\nIn Progress\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_merit",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "merit_list",
+   "fieldtype": "Link",
+   "label": "Merit List",
+   "options": "Merit List Status",
+   "read_only": 1
   }
  ],
  "filters": [],

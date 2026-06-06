@@ -1,0 +1,159 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:selection_criteria_title",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "selection_criteria_title",
+  "column_break_header",
+  "is_active",
+  "section_break_scope",
+  "program",
+  "academic_year",
+  "column_break_scope",
+  "admission_round",
+  "section_break_dates",
+  "start_date",
+  "column_break_dates",
+  "end_date",
+  "section_break_exams",
+  "entrance_exams",
+  "section_break_weightage",
+  "weightage_configuration",
+  "section_break_total",
+  "total_weightage"
+ ],
+ "fields": [
+  {
+   "fieldname": "selection_criteria_title",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Selection Criteria Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "section_break_scope",
+   "fieldtype": "Section Break",
+   "label": "Scope"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Academic Year",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "column_break_scope",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "admission_round",
+   "fieldtype": "Link",
+   "label": "Admission Round",
+   "options": "Student Admission"
+  },
+  {
+   "fieldname": "section_break_dates",
+   "fieldtype": "Section Break",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_dates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "section_break_exams",
+   "fieldtype": "Section Break",
+   "label": "Entrance Exams"
+  },
+  {
+   "fieldname": "entrance_exams",
+   "fieldtype": "Table",
+   "label": "Entrance Exams",
+   "options": "Selection Exam Config"
+  },
+  {
+   "fieldname": "section_break_weightage",
+   "fieldtype": "Section Break",
+   "label": "Weightage Configuration"
+  },
+  {
+   "fieldname": "weightage_configuration",
+   "fieldtype": "Table",
+   "label": "Weightage Configuration",
+   "options": "Selection Weightage Item"
+  },
+  {
+   "fieldname": "section_break_total",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_weightage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Weightage (%)",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Selection Criteria",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "selection_criteria_title"
+}
