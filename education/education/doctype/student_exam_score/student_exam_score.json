@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "exam_name",
+  "obtained_score",
+  "column_break_1",
+  "max_score"
+ ],
+ "fields": [
+  {
+   "fieldname": "exam_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Exam Name",
+   "options": "Exam",
+   "reqd": 1
+  },
+  {
+   "fieldname": "obtained_score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Obtained Score",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max_score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Max Score"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Student Exam Score",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -214,6 +214,16 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Merit List",
+   "link_count": 0,
+   "link_to": "Merit List Status",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Student Applicant",
    "link_count": 0,
    "link_to": "Student Applicant",

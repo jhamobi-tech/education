@@ -19,8 +19,6 @@
   "start_date",
   "column_break_dates",
   "end_date",
-  "section_break_exams",
-  "entrance_exams",
   "section_break_weightage",
   "weightage_configuration",
   "section_break_total",
@@ -96,17 +94,6 @@
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date"
-  },
-  {
-   "fieldname": "section_break_exams",
-   "fieldtype": "Section Break",
-   "label": "Entrance Exams"
-  },
-  {
-   "fieldname": "entrance_exams",
-   "fieldtype": "Table",
-   "label": "Entrance Exams",
-   "options": "Selection Exam Config"
   },
   {
    "fieldname": "section_break_weightage",

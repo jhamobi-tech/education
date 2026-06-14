@@ -150,17 +150,12 @@ class MeritListStatus(Document):
 
 	def _update_range_counts(self, counts):
 		"""Write per-status applicant counts back into each score range row."""
-		status_totals = {}
-		for row in self.score_ranges:
-			status_totals.setdefault(row.merit_status, 0)
-			status_totals[row.merit_status] += counts.get(row.merit_status, 0)
-
 		for row in self.score_ranges:
 			frappe.db.set_value(
 				"Merit Score Range",
 				row.name,
 				"applicant_count",
-				status_totals.get(row.merit_status, 0),
+				counts.get(row.merit_status, 0),
 				update_modified=False,
 			)
 

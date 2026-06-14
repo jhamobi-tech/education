@@ -10,7 +10,6 @@ from frappe.utils import flt, getdate, nowdate
 class SelectionCriteria(Document):
 	def validate(self):
 		self._validate_dates()
-		self._validate_weightage_refs()
 		self._calculate_total_weightage()
 		self._validate_total_weightage()
 
@@ -18,17 +17,6 @@ class SelectionCriteria(Document):
 		if self.start_date and self.end_date:
 			if getdate(self.start_date) > getdate(self.end_date):
 				frappe.throw(_("Start Date cannot be after End Date."))
-
-	def _validate_weightage_refs(self):
-		"""Every weightage row must reference an exam defined in entrance_exams."""
-		defined_exams = {row.exam_name for row in self.entrance_exams}
-		for row in self.weightage_configuration:
-			if row.exam_name not in defined_exams:
-				frappe.throw(
-					_("Weightage row #{0}: Exam '{1}' is not listed in Entrance Exams.").format(
-						row.idx, row.exam_name
-					)
-				)
 
 	def _calculate_total_weightage(self):
 		self.total_weightage = flt(

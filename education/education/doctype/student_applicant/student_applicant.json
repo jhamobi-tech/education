@@ -64,6 +64,8 @@
   "weightage_config",
   "column_break_score_cfg",
   "score_status",
+  "section_student_exams",
+  "student_exam_scores",
   "section_score_breakdown",
   "score_components",
   "section_score_result",
@@ -394,6 +396,17 @@
    "label": "Score Status",
    "options": "Draft\nComputed",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_student_exams",
+   "fieldtype": "Section Break",
+   "label": "Entrance Exam Scores"
+  },
+  {
+   "fieldname": "student_exam_scores",
+   "fieldtype": "Table",
+   "label": "Exam Scores",
+   "options": "Student Exam Score"
   },
   {
    "fieldname": "section_score_breakdown",

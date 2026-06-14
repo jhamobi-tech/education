@@ -126,11 +126,14 @@ class StudentApplicant(Document):
 	def _compute_from_criteria(self, criteria):
 		"""
 		Score computation driven entirely by Selection Criteria config.
-		Each entrance exam row carries score_fieldname (which field to read on
-		this document) and max_score (denominator for normalisation).
-		No exam names or max-scores are hardcoded here.
+		Scores are read from the student_exam_scores child table (dynamic entry).
+		entrance_exams on the criteria doc provides the max_score per exam.
 		"""
-		exam_config = {row.exam_name: row for row in criteria.entrance_exams}
+		# Build score map from student_exam_scores table: exam_name → (obtained, max)
+		score_map = {
+			row.exam_name: (flt(row.obtained_score), flt(row.max_score))
+			for row in (self.student_exam_scores or [])
+		}
 
 		self.score_components = []
 		total_weighted, total_weightage, has_scores = 0.0, 0.0, False
@@ -139,22 +142,19 @@ class StudentApplicant(Document):
 			if not w_row.is_active:
 				continue
 
-			exam = exam_config.get(w_row.exam_name)
-			if not exam or not exam.score_fieldname:
-				continue
+			obtained, max_score = score_map.get(w_row.exam_name, (0.0, 0.0))
 
-			raw = flt(self.get(exam.score_fieldname))
-			if raw:
+			if obtained:
 				has_scores = True
 
-			normalized = _normalize(raw, exam.max_score)
+			normalized = _normalize(obtained, max_score) if max_score else 0.0
 			weightage  = flt(w_row.weightage)
 			weighted   = flt((normalized * weightage) / 100, 4)
 
 			self.append("score_components", {
 				"component":      w_row.exam_name,
 				"score":          normalized,
-				"maximum_score":  100,
+				"maximum_score":  max_score,
 				"weightage":      weightage,
 				"weighted_score": weighted,
 			})
